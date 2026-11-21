@@ -496,30 +496,30 @@
   <!-- Projects -->
   <section id="projects">
     <h2>Selected Works</h2>
-    <p class="section-sub">Open-source reference implementations of the patterns behind the work above.</p>
+    <p class="section-sub">Side projects held to the same bar as the day job: an explicit failure model, real tests and written-down design decisions.</p>
 
     <div class="project-item">
-      <h3><a href="https://github.com/utkarsh-mehrotra/financially-correct-systems" target="_blank" rel="noopener">financially-correct-systems</a></h3>
-      <p>The three building blocks of correct money movement: a double-entry ledger, an idempotent payment processor that cannot double-charge, and a reconciliation engine for matching records across partners.</p>
-      <div class="project-tags"><span class="ptag">Java 17</span><span class="ptag">Spring Boot</span><span class="ptag">Ledgers</span><span class="ptag">Idempotency</span></div>
+      <h3><a href="https://github.com/utkarsh-mehrotra/nse-engine" target="_blank" rel="noopener">nse-engine</a></h3>
+      <p>Deterministic backtesting engine for Indian equities and F&amp;O. Strategies come in as a closed JSON IR, never as code, and run with strict signal@t → fill@t+1 timing, point-in-time data, real transaction costs, margin checks and option-chain fills. The same strategy, data and engine version always produce byte-identical output.</p>
+      <div class="project-tags"><span class="ptag">Python 3.12</span><span class="ptag">Polars</span><span class="ptag">MCP</span><span class="ptag">521 tests</span></div>
     </div>
 
     <div class="project-item">
-      <h3><a href="https://github.com/utkarsh-mehrotra/payment-orchestration-system" target="_blank" rel="noopener">payment-orchestration-system</a></h3>
-      <p>A payment-gateway backend with provider routing on cost, latency and success rate, an append-only double-entry ledger, idempotency keys, and an explicit CREATED → AUTHORIZED → CAPTURED → SETTLED → PAID_OUT state machine.</p>
-      <div class="project-tags"><span class="ptag">Java 21</span><span class="ptag">Spring Boot</span><span class="ptag">Kafka</span><span class="ptag">Resilience4j</span></div>
+      <h3><a href="https://github.com/utkarsh-mehrotra/quill" target="_blank" rel="noopener">quill</a></h3>
+      <p>LLM chat platform built so failures are survivable. Epoch-fenced leases stop zombie workers, an event log lets clients resume streams with Last-Event-ID, and crash recovery never loses, duplicates or interleaves a conversation turn. Includes chaos tests and published load measurements.</p>
+      <div class="project-tags"><span class="ptag">Python</span><span class="ptag">Postgres</span><span class="ptag">LangGraph</span><span class="ptag">SSE</span><span class="ptag">Chaos tests</span></div>
     </div>
 
     <div class="project-item">
-      <h3><a href="https://github.com/utkarsh-mehrotra/operational-maturity-signals" target="_blank" rel="noopener">operational-maturity-signals</a></h3>
-      <p>A payment flow tested against injected network faults (Resilience4j + Toxiproxy), and an event-sourced account service with CQRS, snapshots and read-model projections.</p>
-      <div class="project-tags"><span class="ptag">Java 17</span><span class="ptag">Chaos testing</span><span class="ptag">Event sourcing</span><span class="ptag">CQRS</span></div>
+      <h3><a href="https://github.com/utkarsh-mehrotra/nirikshak-kyc" target="_blank" rel="noopener">nirikshak-kyc</a></h3>
+      <p>KYC document extraction for lending (PAN, masked Aadhaar, incorporation certificates) that fails closed: any rule failure or ungrounded, low-confidence or repaired field goes to human review. Field-level encryption, an append-only audit log and an eval harness with Wilson confidence intervals.</p>
+      <div class="project-tags"><span class="ptag">Python</span><span class="ptag">FastAPI</span><span class="ptag">OCR</span><span class="ptag">Evals</span></div>
     </div>
 
     <div class="project-item">
-      <h3><a href="https://github.com/utkarsh-mehrotra/low-level-system-designs" target="_blank" rel="noopener">low-level-system-designs</a></h3>
-      <p>Airline, car-rental and parking-lot systems built as services. Each one covers a concurrency problem: pessimistic locking, sagas, date-overlap locks and Redis-backed allocation.</p>
-      <div class="project-tags"><span class="ptag">Java</span><span class="ptag">Concurrency</span><span class="ptag">Sagas</span></div>
+      <h3><a href="https://github.com/utkarsh-mehrotra/helpingduck" target="_blank" rel="noopener">helpingduck</a></h3>
+      <p>Long-form publishing platform built as seven Spring Boot services (identity, content, payments, notifications, media, AI, and an API gateway with JWT auth and rate limiting). Services communicate through SQS events with dead-letter queues, use DynamoDB and Neo4j, and deploy to AWS through GitHub Actions.</p>
+      <div class="project-tags"><span class="ptag">Java</span><span class="ptag">Spring Boot</span><span class="ptag">AWS</span><span class="ptag">SQS</span><span class="ptag">Microservices</span></div>
     </div>
   </section>
 
@@ -536,7 +536,7 @@
     </div>
     <div class="skill-group">
       <h3>Languages</h3>
-      <div class="skills-wrap"><span class="skill">Java</span><span class="skill">SQL</span><span class="skill">Spring Boot</span></div>
+      <div class="skills-wrap"><span class="skill">Java</span><span class="skill">Python</span><span class="skill">SQL</span><span class="skill">Spring Boot</span></div>
     </div>
     <div class="skill-group">
       <h3>Data</h3>
