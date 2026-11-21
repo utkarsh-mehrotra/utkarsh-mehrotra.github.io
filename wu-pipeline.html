@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Architecting a 100M Events/Day Fraud Detection Pipeline: Tradeoffs & Lessons</title>
+<meta name="description" content="How a fraud detection system moved from batch to a sub-second streaming pipeline at 100M+ events/day — Kafka partitioning, Flink vs. Spark, exactly-once tradeoffs, and lessons learned.">
+<meta name="author" content="Utkarsh Mehrotra">
+<link rel="canonical" href="https://utkarsh-mehrotra.github.io/wu-pipeline.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Architecting a 100M Events/Day Fraud Detection Pipeline: Tradeoffs &amp; Lessons">
+<meta property="og:description" content="How a fraud detection system moved from batch to a sub-second streaming pipeline at 100M+ events/day — Kafka partitioning, Flink vs. Spark, exactly-once tradeoffs, and lessons learned.">
+<meta property="og:url" content="https://utkarsh-mehrotra.github.io/wu-pipeline.html">
+<meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -81,7 +90,7 @@
     max-width: 680px;
   }
   .byline {
-    display: flex;
+    display: flex; flex-wrap: wrap;
     align-items: center;
     gap: 16px;
     font-size: 0.83rem;
@@ -274,6 +283,10 @@
   .footer-links { display: flex; gap: 16px; }
   .footer-links a { font-size: 0.8rem; color: var(--ink4); }
   .footer-links a:hover { color: var(--ink); text-decoration: none; }
+  .more-reading { margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--border); }
+  .more-reading h2 { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink3); margin: 0 0 14px; border: 0; padding: 0; }
+  .more-reading a { display: block; padding: 10px 0; color: var(--ink); text-decoration: none; font-weight: 500; }
+  .more-reading a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -301,6 +314,8 @@
       <span>Chief Engineer, Samsung Electronics</span>
       <span class="byline-dot">·</span>
       <span>Ex–Western Union</span>
+      <span class="byline-dot">·</span>
+      <span>11 min read</span>
     </div>
   </div>
 
@@ -534,6 +549,13 @@
     <p>The architecture described here relies on mature, well-understood components: Kafka, Flink, and Spark. The engineering challenge is not in the individual tools but in the compositional decisions — how they are connected, where the ownership boundaries sit, and what constraints each stage is held to. Getting those decisions right, and being honest about the ones that could be improved, is where the real work lies.</p>
 
   </article>
+
+
+  <nav class="more-reading" aria-label="More writing">
+    <h2>Keep reading</h2>
+    <a href="scaling-fraud-detection.html">What Breaks at 50K Events/sec: Scaling a Fraud Pipeline 40× →</a>
+    <a href="samsung-finance.html">Building a Lending Platform Across Four Markets →</a>
+  </nav>
 
   <div class="article-footer">
     <p>© Utkarsh Mehrotra</p>

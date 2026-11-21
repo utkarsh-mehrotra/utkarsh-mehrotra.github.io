@@ -1,31 +1,33 @@
 # Utkarsh Mehrotra - Personal Portfolio
 
-A sleek, static, single-file personal portfolio landing page for [Utkarsh Mehrotra](https://github.com/utkarsh-mehrotra).
+A static personal portfolio and engineering blog for [Utkarsh Mehrotra](https://github.com/utkarsh-mehrotra).
 
 ## 🌍 Live Website
 
-View the live portfolio at: **[https://utkarsh-mehrotra.github.io/](https://utkarsh-mehrotra.github.io/)**
+**[https://utkarsh-mehrotra.github.io/](https://utkarsh-mehrotra.github.io/)**
 
-## 🛠️ Tech Stack & Architecture
+## 📁 Structure
 
-This portfolio is built to be as robust, fast, and simple as possible:
-- **Pure HTML5**
-- **Vanilla CSS3** (No Tailwind, no Bootstrap)
-- **Vanilla JavaScript** (Intersection Observers for scroll-reveals)
-- **Google Fonts** (`Cormorant` and `DM Mono`)
+| Path | Purpose |
+|------|---------|
+| `index.html` | Home page (light/dark theme, follows system preference with a manual toggle) |
+| `wu-pipeline.html` | Article: 100M events/day fraud detection pipeline |
+| `samsung-finance.html` | Article: multi-market lending platform correctness |
+| `scaling-fraud-detection.html` | Article: thought experiment on scaling to 50K events/sec |
+| `jpmc-scale.html`, `index-dark.html` | Redirect stubs for old URLs |
+| `favicon.svg`, `robots.txt`, `sitemap.xml` | Site metadata |
+| `notes/` | Private working notes (**not deployed**) |
+| `assets/blogs/` | Article PDFs (**not deployed**, not linked) |
 
-The entire application is beautifully self-contained within a single `index.html` file. This zero-dependency architecture guarantees lightning-fast load times, perfect SEO, and absolute zero maintenance decay over the years.
+## 🛠️ Tech Stack
+
+- Plain HTML5, vanilla CSS and vanilla JavaScript: no frameworks, no build step
+- Google Fonts: Inter (home page), Inter + JetBrains Mono (articles)
 
 ## 🚀 Local Development
 
-To view or edit the portfolio locally:
-1. Clone the repository.
-2. Double click `index.html` to open it directly in any modern web browser.
-3. No build steps, `npm install`, or local dev servers are required!
+Open `index.html` in a browser. No install or build is required.
 
-## 🤖 Automated Deployment
+## 🤖 Deployment
 
-This repository includes a GitHub Actions workflow (`.github/workflows/deploy.yml`) that automatically securely deploys the `main` branch directly to GitHub Pages the moment you push a change.
-
----
-*Designed for elegance. Built for performance.*
+`.github/workflows/deploy.yml` deploys `main` to GitHub Pages on every push. It copies only the public files (`*.html`, `favicon.svg`, `robots.txt`, `sitemap.xml`) into `_site/` and publishes that folder. **When you add a new public file type, add it to the "Assemble site" step.**

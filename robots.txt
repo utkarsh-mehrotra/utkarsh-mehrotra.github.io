@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://utkarsh-mehrotra.github.io/sitemap.xml

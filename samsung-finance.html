@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Building a Lending Platform Across Four Markets: Correctness at Scale</title>
+<meta name="description" content="Designing a multi-market lending platform for financial correctness under distributed failure — config-driven markets, transactional outbox, sagas, and event sourcing.">
+<meta name="author" content="Utkarsh Mehrotra">
+<link rel="canonical" href="https://utkarsh-mehrotra.github.io/samsung-finance.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Building a Lending Platform Across Four Markets: Correctness at Scale">
+<meta property="og:description" content="Designing a multi-market lending platform for financial correctness under distributed failure — config-driven markets, transactional outbox, sagas, and event sourcing.">
+<meta property="og:url" content="https://utkarsh-mehrotra.github.io/samsung-finance.html">
+<meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -49,7 +58,7 @@
     font-size: 1.05rem; color: var(--ink3); line-height: 1.65;
     margin-bottom: 28px; max-width: 680px;
   }
-  .byline { display: flex; align-items: center; gap: 16px; font-size: 0.83rem; color: var(--ink4); }
+  .byline { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; font-size: 0.83rem; color: var(--ink4); }
   .byline-author { font-weight: 600; color: var(--ink2); }
   .byline-dot { color: var(--border); }
 
@@ -208,6 +217,10 @@
     .arch-label { width: 80px; font-size: 0.55rem; }
     .lb-stage { width: 130px; }
   }
+  .more-reading { margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--border); }
+  .more-reading h2 { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink3); margin: 0 0 14px; border: 0; padding: 0; }
+  .more-reading a { display: block; padding: 10px 0; color: var(--ink); text-decoration: none; font-weight: 500; }
+  .more-reading a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -235,6 +248,8 @@
       <span>Chief Engineer, Samsung Electronics</span>
       <span class="byline-dot">·</span>
       <span>Samsung's lending platform</span>
+      <span class="byline-dot">·</span>
+      <span>18 min read</span>
     </div>
   </div>
 
@@ -824,6 +839,13 @@
 
 
   </article>
+
+
+  <nav class="more-reading" aria-label="More writing">
+    <h2>Keep reading</h2>
+    <a href="wu-pipeline.html">Architecting a 100M Events/Day Fraud Detection Pipeline →</a>
+    <a href="scaling-fraud-detection.html">What Breaks at 50K Events/sec: Scaling a Fraud Pipeline 40× →</a>
+  </nav>
 
   <div class="article-footer">
     <p>© Utkarsh Mehrotra</p>

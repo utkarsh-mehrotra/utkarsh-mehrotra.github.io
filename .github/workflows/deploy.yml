@@ -29,10 +29,17 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
         
+      # Publish only public site files. notes/, assets/blogs/ (unlinked PDFs),
+      # README and workflow files stay out of the deployed site.
+      - name: Assemble site
+        run: |
+          mkdir -p _site
+          cp *.html favicon.svg robots.txt sitemap.xml _site/
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: '_site'
           
       - name: Deploy to GitHub Pages
         id: deployment
