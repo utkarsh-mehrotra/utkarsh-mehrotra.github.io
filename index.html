@@ -27,7 +27,6 @@
   ],
   "url": "https://utkarsh-mehrotra.github.io/",
   "sameAs": [
-    "https://github.com/utkarsh-mehrotra",
     "https://www.linkedin.com/in/utkarshmehrotra-/"
   ],
   "knowsAbout": ["Distributed systems", "Stream processing", "Payments", "Fraud detection", "Apache Kafka", "Apache Flink", "Event sourcing"]
@@ -409,7 +408,6 @@
     <div class="hero-links">
       <a href="mailto:h20180038g@alumni.bits-pilani.ac.in" class="primary">Get in touch</a>
       <a href="#writing">Read my writing</a>
-      <a href="https://github.com/utkarsh-mehrotra" target="_blank" rel="noopener">GitHub</a>
       <a href="https://www.linkedin.com/in/utkarshmehrotra-/" target="_blank" rel="noopener">LinkedIn</a>
     </div>
   </header>
@@ -493,33 +491,27 @@
     </div>
   </section>
 
-  <!-- Projects -->
+  <!-- Independent work -->
   <section id="projects">
-    <h2>Selected Works</h2>
-    <p class="section-sub">Side projects held to the same bar as the day job: an explicit failure model, real tests and written-down design decisions.</p>
+    <h2>Independent Work</h2>
+    <p class="section-sub">Systems I've built outside work to the same bar as the day job: an explicit failure model, real tests and written-down design decisions.</p>
 
     <div class="project-item">
-      <h3><a href="https://github.com/utkarsh-mehrotra/nse-engine" target="_blank" rel="noopener">nse-engine</a></h3>
-      <p>Deterministic backtesting engine for Indian equities and F&amp;O. Strategies come in as a closed JSON IR, never as code, and run with strict signal@t → fill@t+1 timing, point-in-time data, real transaction costs, margin checks and option-chain fills. The same strategy, data and engine version always produce byte-identical output.</p>
-      <div class="project-tags"><span class="ptag">Python 3.12</span><span class="ptag">Polars</span><span class="ptag">MCP</span><span class="ptag">521 tests</span></div>
+      <h3>Deterministic backtesting engine · Indian equities &amp; F&amp;O</h3>
+      <p>Strategies come in as a closed JSON spec, never as code, and run with strict signal@t → fill@t+1 timing, point-in-time data, real transaction costs, margin checks and option-chain fills. The same strategy, data and engine version always produce byte-identical results, covered by 500+ tests.</p>
+      <div class="project-tags"><span class="ptag">Python</span><span class="ptag">Polars</span><span class="ptag">Determinism</span><span class="ptag">MCP</span></div>
     </div>
 
     <div class="project-item">
-      <h3><a href="https://github.com/utkarsh-mehrotra/quill" target="_blank" rel="noopener">quill</a></h3>
-      <p>LLM chat platform built so failures are survivable. Epoch-fenced leases stop zombie workers, an event log lets clients resume streams with Last-Event-ID, and crash recovery never loses, duplicates or interleaves a conversation turn. Includes chaos tests and published load measurements.</p>
-      <div class="project-tags"><span class="ptag">Python</span><span class="ptag">Postgres</span><span class="ptag">LangGraph</span><span class="ptag">SSE</span><span class="ptag">Chaos tests</span></div>
+      <h3>Crash-safe LLM chat platform</h3>
+      <p>Built so failures are survivable. Epoch-fenced leases stop zombie workers, an event log lets clients resume streams after a disconnect, and crash recovery never loses, duplicates or interleaves a conversation turn. Validated with chaos tests and load measurements.</p>
+      <div class="project-tags"><span class="ptag">Python</span><span class="ptag">Postgres</span><span class="ptag">LangGraph</span><span class="ptag">Chaos testing</span></div>
     </div>
 
     <div class="project-item">
-      <h3><a href="https://github.com/utkarsh-mehrotra/nirikshak-kyc" target="_blank" rel="noopener">nirikshak-kyc</a></h3>
-      <p>KYC document extraction for lending (PAN, masked Aadhaar, incorporation certificates) that fails closed: any rule failure or ungrounded, low-confidence or repaired field goes to human review. Field-level encryption, an append-only audit log and an eval harness with Wilson confidence intervals.</p>
+      <h3>Fail-closed KYC extraction for lending</h3>
+      <p>Extracts PAN, masked Aadhaar and incorporation documents, and sends anything uncertain to human review: any rule failure or ungrounded, low-confidence or repaired field. Field-level encryption, an append-only audit log and an evaluation harness with confidence intervals.</p>
       <div class="project-tags"><span class="ptag">Python</span><span class="ptag">FastAPI</span><span class="ptag">OCR</span><span class="ptag">Evals</span></div>
-    </div>
-
-    <div class="project-item">
-      <h3><a href="https://github.com/utkarsh-mehrotra/helpingduck" target="_blank" rel="noopener">helpingduck</a></h3>
-      <p>Long-form publishing platform built as seven Spring Boot services (identity, content, payments, notifications, media, AI, and an API gateway with JWT auth and rate limiting). Services communicate through SQS events with dead-letter queues, use DynamoDB and Neo4j, and deploy to AWS through GitHub Actions.</p>
-      <div class="project-tags"><span class="ptag">Java</span><span class="ptag">Spring Boot</span><span class="ptag">AWS</span><span class="ptag">SQS</span><span class="ptag">Microservices</span></div>
     </div>
   </section>
 
@@ -569,7 +561,6 @@
   <footer id="contact">
     <p>© Utkarsh Mehrotra</p>
     <div class="footer-links">
-      <a href="https://github.com/utkarsh-mehrotra" target="_blank" rel="noopener">GitHub</a>
       <a href="https://www.linkedin.com/in/utkarshmehrotra-/" target="_blank" rel="noopener">LinkedIn</a>
       <a href="mailto:h20180038g@alumni.bits-pilani.ac.in">Email</a>
     </div>
