@@ -436,10 +436,11 @@
       <h3>Chief Engineer</h3>
       <div class="exp-company">Samsung Electronics · Bengaluru</div>
       <ul>
-        <li>Own end-to-end backend architecture for Samsung's lending platform across <strong>4 markets</strong> (Thailand, Indonesia, Philippines, India): service decomposition, data model, event-streaming topology and deployment.</li>
-        <li>Architected a real-time payment reconciliation engine with exactly-once semantics. It replaced manual reconciliation and cut settlement turnaround from <strong>T+2 to near real-time</strong>.</li>
+        <li>Set the technical direction for Samsung's lending platform across <strong>4 markets</strong> (Thailand, Indonesia, Philippines, India). I own the architecture roadmap, run design reviews across the backend teams, and make the cross-team calls on service boundaries, data ownership and event-streaming topology.</li>
+        <li>Architected the real-time payment reconciliation engine that matches every repayment against loan records with exactly-once semantics. It replaced manual reconciliation and cut settlement turnaround from <strong>T+2 to near real-time</strong> in every market.</li>
         <li>Designed an idempotent loan-lifecycle state machine that stays correct under retries, duplicate events and partial failures from third-party payment rails. Loan state is strongly consistent, while reporting runs on eventual consistency.</li>
-        <li>Made market onboarding config-driven, so rolling out a new market takes <strong>days instead of weeks</strong> with no core code changes.</li>
+        <li>Made market onboarding config-driven, so launching a new market takes <strong>days instead of weeks</strong> with no core code changes.</li>
+        <li>Mentor senior engineers on distributed-systems design, and set the platform-wide standards for idempotency, failure handling and reconciliation audits.</li>
       </ul>
     </div>
 
@@ -448,23 +449,20 @@
       <h3>Lead Software Engineer</h3>
       <div class="exp-company">Western Union · Pune</div>
       <ul>
-        <li>Led the redesign of fraud detection from batch to a streaming pipeline (Kafka, Flink, Spark Streaming) handling <strong>100M+ events/day</strong> at sub-second latency across transaction, behavioural and authentication streams.</li>
-        <li>Moved fraud intervention ahead of settlement, shrinking the exposure window from minutes to under a second.</li>
-        <li>Built configurable rule-execution and enrichment pipelines so analysts could ship new fraud rules without an engineering deploy. ML risk scoring was integrated off the critical transaction path.</li>
-        <li>Hardened the pipeline for traffic spikes with checkpointing, backpressure control and dynamic parallelism, plus end-to-end metrics and alerting.</li>
+        <li>Led the redesign of fraud detection from batch to a streaming pipeline (Kafka, Flink, Spark Streaming) handling <strong>100M+ events/day</strong> at sub-second latency. This moved intervention ahead of settlement and shrank the exposure window from minutes to under a second.</li>
+        <li>Decoupled fraud rules from the deploy cycle, so analysts ship new rules in hours instead of waiting for an engineering release.</li>
       </ul>
     </div>
 
     <div class="exp-item">
       <div class="exp-meta">Jan 2020 – Dec 2024</div>
-      <h3>Software Engineer 3 · Software Engineer 2 · Intern</h3>
+      <h3>Software Engineer 3 · Software Engineer 2</h3>
       <div class="exp-company">Cisco · Bengaluru</div>
       <ul>
         <li>Led the Neo4j → Amazon Neptune migration with full Gremlin traversal parity: <strong>~$150K/year saved</strong>, zero downtime and no query-performance regression.</li>
-        <li>Led the monolith → microservices migration (Spring Boot, AWS ECS) of the entitlement and order platform that feeds quoting, invoicing and finance systems.</li>
-        <li>Built the ELK + Prometheus + Grafana observability stack that cut <strong>MTTR by 50%+</strong> for a platform used by hundreds of engineering teams, and an RBAC framework adopted by <strong>300+ teams</strong>.</li>
-        <li>Built a metadata-driven onboarding engine for new customer-product hierarchies with no code changes, and cut entitlement-service response times by <strong>40%</strong> through query profiling and index tuning.</li>
-        <li>Mentored junior engineers, wrote the migration playbooks that became team standards, and defined canonical API contracts across 10+ enterprise systems.</li>
+        <li>Led the monolith → microservices migration (Spring Boot, AWS ECS) of the entitlement and order platform that feeds Cisco's quoting, invoicing and finance systems.</li>
+        <li>Built the observability stack (ELK, Prometheus, Grafana) that cut <strong>MTTR by 50%+</strong> on a platform used by hundreds of engineering teams.</li>
+        <li>Set platform-wide standards: canonical API contracts across <strong>10+ enterprise systems</strong>, an RBAC framework adopted by <strong>300+ teams</strong>, and the migration playbooks the team adopted. I also mentored the team's junior engineers.</li>
       </ul>
     </div>
   </section>
