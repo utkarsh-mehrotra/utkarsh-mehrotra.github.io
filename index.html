@@ -334,21 +334,6 @@
     color: var(--tag-amber-fg);
   }
 
-  /* ── Skills ── */
-  .skill-group { display: grid; grid-template-columns: 150px 1fr; gap: 8px 20px; align-items: baseline; padding: 12px 0; border-top: 1px solid var(--border); }
-  .skill-group:first-of-type { border-top: none; padding-top: 0; }
-  .skill-group h3 { font-size: 0.78rem; font-weight: 600; color: var(--ink3); text-transform: uppercase; letter-spacing: 0.06em; }
-  .skills-wrap { display: flex; flex-wrap: wrap; gap: 8px; }
-  .skill {
-    font-size: 0.8rem;
-    padding: 4px 12px;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    color: var(--ink2);
-    background: var(--bg-card);
-  }
-  @media (max-width: 520px) { .skill-group { grid-template-columns: 1fr; } }
-
   /* ── Education ── */
   .edu-item { margin-bottom: 16px; }
   .edu-item:last-child { margin-bottom: 0; }
@@ -382,7 +367,6 @@
       <a href="#writing">Writing</a>
       <a href="#experience">Experience</a>
       <a href="#projects" class="optional-sm">Projects</a>
-      <a href="#skills" class="optional">Skills</a>
       <button class="theme-toggle" type="button" aria-label="Toggle dark mode">
         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
@@ -509,35 +493,6 @@
     </div>
   </section>
 
-  <!-- Skills -->
-  <section id="skills">
-    <h2>Expertise</h2>
-    <div class="skill-group">
-      <h3>Patterns</h3>
-      <div class="skills-wrap"><span class="skill">Exactly-once processing</span><span class="skill">Idempotency</span><span class="skill">Event sourcing</span><span class="skill">Sagas</span><span class="skill">Transactional outbox</span><span class="skill">CQRS</span></div>
-    </div>
-    <div class="skill-group">
-      <h3>Streaming</h3>
-      <div class="skills-wrap"><span class="skill">Apache Kafka</span><span class="skill">Apache Flink</span><span class="skill">Spark Streaming</span></div>
-    </div>
-    <div class="skill-group">
-      <h3>Languages</h3>
-      <div class="skills-wrap"><span class="skill">Java</span><span class="skill">Python</span><span class="skill">SQL</span><span class="skill">Spring Boot</span></div>
-    </div>
-    <div class="skill-group">
-      <h3>Data</h3>
-      <div class="skills-wrap"><span class="skill">MongoDB</span><span class="skill">Neo4j</span><span class="skill">Amazon Neptune (Gremlin)</span></div>
-    </div>
-    <div class="skill-group">
-      <h3>Platform</h3>
-      <div class="skills-wrap"><span class="skill">Microservices</span><span class="skill">AWS ECS</span><span class="skill">Docker</span><span class="skill">Jenkins CI/CD</span></div>
-    </div>
-    <div class="skill-group">
-      <h3>Observability</h3>
-      <div class="skills-wrap"><span class="skill">ELK Stack</span><span class="skill">Prometheus</span><span class="skill">Grafana</span></div>
-    </div>
-  </section>
-
   <!-- Education -->
   <section id="education">
     <h2>Education</h2>
@@ -575,7 +530,7 @@
   });
 
   // Scroll reveal
-  const revealSelector = 'section > h2, .about-text, .exp-item, .writing-card, .project-item, .skill-group, .edu-item';
+  const revealSelector = 'section > h2, .about-text, .exp-item, .writing-card, .project-item, .edu-item';
   const revealEls = document.querySelectorAll(revealSelector);
   revealEls.forEach(el => el.classList.add('reveal'));
   const revealObserver = new IntersectionObserver((entries, observer) => {
