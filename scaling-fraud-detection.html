@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>What Breaks at 50K Events/sec: Scaling a Fraud Pipeline 40×</title>
+<meta name="color-scheme" content="light dark">
+<script>try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
 <meta name="description" content="A thought experiment on scaling a 100M events/day fraud pipeline to 50K+ events/sec — which components fail first, at which inflection point, and what replaces them.">
 <meta name="author" content="Utkarsh Mehrotra">
 <link rel="canonical" href="https://utkarsh-mehrotra.github.io/scaling-fraud-detection.html">
@@ -179,20 +181,112 @@
   .more-reading a { display: block; padding: 10px 0; color: var(--ink); text-decoration: none; font-weight: 500; }
   .more-reading a:hover { text-decoration: underline; }
 </style>
+<style id="site-theme">
+  /* Shared site theme: matches index.html tokens; light + dark. */
+  :root {
+    --bg: #fafaf9; --bg2: #f3f3f0; --bg3: #ececE8;
+    --border: #eaeaeb; --border-hover: #d4d4d4;
+    --ink3: #737373;
+    --accent: #2563eb;
+    --nav-bg: rgba(250, 250, 249, 0.85);
+    --code-inline: #c7254e;
+    --callout-blue-bg: #e8f0fe; --callout-blue-fg: #1a56c4;
+    --callout-red-bg: #fff0f0; --callout-red-fg: #a00;
+    --tint-amber: #fffaf5; --tint-red: #fff5f5;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+    --ink: #ececec; --ink2: #c9c9ce; --ink3: #8f8f97; --ink4: #6e6e76;
+    --bg: #111114; --bg2: #18181c; --bg3: #232329;
+    --border: #2a2a30; --border-hover: #3f3f46;
+    --accent: #7aa2ff; --accent2: #f0a35e; --danger: #ff7070;
+    --mono-bg: #0a0a0d; --nav-bg: rgba(17, 17, 20, 0.85);
+    --code-inline: #ff8fab;
+    --callout-blue-bg: rgba(122, 162, 255, 0.12); --callout-blue-fg: #9db8ff;
+    --callout-red-bg: rgba(255, 112, 112, 0.12); --callout-red-fg: #ff9a9a;
+    --tint-amber: rgba(240, 163, 94, 0.06); --tint-red: rgba(255, 112, 112, 0.06);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #ececec; --ink2: #c9c9ce; --ink3: #8f8f97; --ink4: #6e6e76;
+    --bg: #111114; --bg2: #18181c; --bg3: #232329;
+    --border: #2a2a30; --border-hover: #3f3f46;
+    --accent: #7aa2ff; --accent2: #f0a35e; --danger: #ff7070;
+    --mono-bg: #0a0a0d; --nav-bg: rgba(17, 17, 20, 0.85);
+    --code-inline: #ff8fab;
+    --callout-blue-bg: rgba(122, 162, 255, 0.12); --callout-blue-fg: #9db8ff;
+    --callout-red-bg: rgba(255, 112, 112, 0.12); --callout-red-fg: #ff9a9a;
+    --tint-amber: rgba(240, 163, 94, 0.06); --tint-red: rgba(255, 112, 112, 0.06);
+  }
+  body { background: var(--bg); color: var(--ink); }
+  code { color: var(--code-inline); }
+  pre code { color: inherit; }
+  .lesson-num { background: var(--callout-blue-bg); }
+  .fb-perf { background: var(--callout-blue-bg); color: var(--callout-blue-fg); }
+  .fb-hard { background: var(--callout-red-bg); color: var(--callout-red-fg); }
+  .scale-col.paypal { background: var(--tint-amber); }
+  .scale-col.jpmc { background: var(--tint-red); }
+
+  /* Diagrams: remap light-mode SVG colours in dark mode. */
+  :root[data-theme="dark"] svg [fill="#f7f8fa"], :root[data-theme="dark"] svg [fill="#fff"], :root[data-theme="dark"] svg [fill="#ffffff"] { fill: var(--bg3); }
+  :root[data-theme="dark"] svg [fill="#111"], :root[data-theme="dark"] svg [fill="#333"] { fill: var(--ink); }
+  :root[data-theme="dark"] svg [fill="#666"], :root[data-theme="dark"] svg [fill="#888"], :root[data-theme="dark"] svg [fill="#999"] { fill: var(--ink3); }
+  :root[data-theme="dark"] svg [stroke="#e4e5e7"], :root[data-theme="dark"] svg [stroke="#ccc"] { stroke: var(--border-hover); }
+  :root[data-theme="dark"] svg [stroke="#0055d4"] { stroke: var(--accent); }
+  :root[data-theme="dark"] svg [fill="#0055d4"] { fill: var(--accent); }
+  :root[data-theme="dark"] svg [fill="#fff0f0"] { fill: var(--callout-red-bg); }
+  :root[data-theme="dark"] svg [fill="#a00"] { fill: var(--callout-red-fg); }
+  :root[data-theme="dark"] pre, :root[data-theme="dark"] .code-block { border: 1px solid var(--border); }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) svg [fill="#f7f8fa"], :root:not([data-theme="light"]) svg [fill="#fff"], :root:not([data-theme="light"]) svg [fill="#ffffff"] { fill: var(--bg3); }
+    :root:not([data-theme="light"]) svg [fill="#111"], :root:not([data-theme="light"]) svg [fill="#333"] { fill: var(--ink); }
+    :root:not([data-theme="light"]) svg [fill="#666"], :root:not([data-theme="light"]) svg [fill="#888"], :root:not([data-theme="light"]) svg [fill="#999"] { fill: var(--ink3); }
+    :root:not([data-theme="light"]) svg [stroke="#e4e5e7"], :root:not([data-theme="light"]) svg [stroke="#ccc"] { stroke: var(--border-hover); }
+    :root:not([data-theme="light"]) svg [stroke="#0055d4"] { stroke: var(--accent); }
+    :root:not([data-theme="light"]) svg [fill="#0055d4"] { fill: var(--accent); }
+  :root:not([data-theme="light"]) svg [fill="#fff0f0"] { fill: var(--callout-red-bg); }
+  :root:not([data-theme="light"]) svg [fill="#a00"] { fill: var(--callout-red-fg); }
+    :root:not([data-theme="light"]) pre, :root:not([data-theme="light"]) .code-block { border: 1px solid var(--border); }
+  }
+
+  /* Site nav (same as home page) */
+  nav.site-nav { position: sticky; top: 0; z-index: 100; background: var(--nav-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+  .nav-inner { max-width: 760px; margin: 0 auto; padding: 0 32px; display: flex; align-items: center; height: 48px; }
+  .nav-name { font-weight: 600; font-size: 0.9rem; color: var(--ink); margin-right: auto; text-decoration: none; white-space: nowrap; }
+  .nav-links { display: flex; align-items: center; }
+  .nav-links a { font-size: 0.82rem; color: var(--ink3); text-decoration: none; padding: 0 10px; height: 48px; display: flex; align-items: center; transition: color 0.15s; }
+  .nav-links a:hover { color: var(--ink); }
+  .theme-toggle { margin-left: 8px; width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--border); border-radius: 6px; background: transparent; color: var(--ink3); cursor: pointer; }
+  .theme-toggle:hover { color: var(--ink); border-color: var(--border-hover); }
+  .theme-toggle svg { width: 16px; height: 16px; }
+  .icon-sun { display: none; }
+  :root[data-theme="dark"] .icon-sun { display: block; }
+  :root[data-theme="dark"] .icon-moon { display: none; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .icon-sun { display: block; }
+    :root:not([data-theme="light"]) .icon-moon { display: none; }
+  }
+  @media (max-width: 600px) { .nav-inner { padding: 0 20px; } .nav-links a { padding: 0 8px; } .nav-links a.optional { display: none; } }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+</style>
 </head>
 <body>
+<nav class="site-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a class="nav-name" href="./">Utkarsh Mehrotra</a>
+    <div class="nav-links">
+      <a href="./#writing">Writing</a>
+      <a href="./#experience" class="optional">Experience</a>
+      <a href="https://www.linkedin.com/in/utkarshmehrotra-/" target="_blank" rel="noopener">LinkedIn</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle dark mode">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
 <div class="page">
 
-  <header class="site-header">
-    <div style="display:flex;gap:20px">
-      <a href="https://utkarsh-mehrotra.github.io/">Home</a>
-      <span class="header-sep">·</span>
-      <a href="https://utkarsh-mehrotra.github.io/#writing">Writing</a>
-    </div>
-    <div style="display:flex;gap:16px">
-      <a href="https://www.linkedin.com/in/utkarshmehrotra-/">LinkedIn</a>
-    </div>
-  </header>
 
   <div class="article-header">
     <span class="category-label">Engineering · Distributed Systems · Financial Infrastructure</span>
@@ -547,11 +641,20 @@
   <div class="article-footer">
     <p>© Utkarsh Mehrotra</p>
     <div class="footer-links">
-      <a href="https://utkarsh-mehrotra.github.io/">Portfolio</a>
+      <a href="./">Portfolio</a>
       <a href="https://www.linkedin.com/in/utkarshmehrotra-/">LinkedIn</a>
     </div>
   </div>
 
 </div>
+<script>
+  document.querySelector('.theme-toggle').addEventListener('click', () => {
+    const root = document.documentElement;
+    const current = root.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    const next = current === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    try { localStorage.setItem('theme', next); } catch (e) {}
+  });
+</script>
 </body>
 </html>
