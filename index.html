@@ -335,6 +335,20 @@
     font-weight: 500;
   }
 
+  .status-wip {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 8px;
+    font-size: 0.64rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: var(--tag-amber-bg);
+    color: var(--tag-amber-fg);
+  }
+
   /* ── Skills ── */
   .skill-group { display: grid; grid-template-columns: 150px 1fr; gap: 8px 20px; align-items: baseline; padding: 12px 0; border-top: 1px solid var(--border); }
   .skill-group:first-of-type { border-top: none; padding-top: 0; }
@@ -494,18 +508,24 @@
   <!-- Independent work -->
   <section id="projects">
     <h2>Independent Work</h2>
-    <p class="section-sub">Systems I've built outside work to the same bar as the day job: an explicit failure model, real tests and written-down design decisions.</p>
+    <p class="section-sub">Fintech systems I build outside work, each focused on one hard correctness problem and backed by tests, measurements and a written design.</p>
 
     <div class="project-item">
       <h3>Deterministic backtesting engine · Indian equities &amp; F&amp;O</h3>
       <p>Strategies come in as a closed JSON spec, never as code, and run with strict signal@t → fill@t+1 timing, point-in-time data, real transaction costs, margin checks and option-chain fills. The same strategy, data and engine version always produce byte-identical results, covered by 500+ tests.</p>
-      <div class="project-tags"><span class="ptag">Python</span><span class="ptag">Polars</span><span class="ptag">Determinism</span><span class="ptag">MCP</span></div>
+      <div class="project-tags"><span class="ptag">Python</span><span class="ptag">Polars</span><span class="ptag">Determinism</span><span class="ptag">Point-in-time data</span></div>
     </div>
 
     <div class="project-item">
-      <h3>Crash-safe LLM chat platform</h3>
-      <p>Built so failures are survivable. Epoch-fenced leases stop zombie workers, an event log lets clients resume streams after a disconnect, and crash recovery never loses, duplicates or interleaves a conversation turn. Validated with chaos tests and load measurements.</p>
-      <div class="project-tags"><span class="ptag">Python</span><span class="ptag">Postgres</span><span class="ptag">LangGraph</span><span class="ptag">Chaos testing</span></div>
+      <h3>Bitemporal loan servicing engine <span class="status-wip">In progress</span></h3>
+      <p>Tackles the hardest problem in lending software: a payment dated 3 March that arrives on 20 March. The design event-sources loans on two time axes (when it happened, when we learned it), so backdated payments, reversals and rate changes recompute interest, fees and delinquency deterministically, and any past view stays reproducible for audit.</p>
+      <div class="project-tags"><span class="ptag">Event sourcing</span><span class="ptag">Bitemporal data</span><span class="ptag">Property-based testing</span></div>
+    </div>
+
+    <div class="project-item">
+      <h3>High-contention double-entry ledger <span class="status-wip">In progress</span></h3>
+      <p>Targets strictly serializable transfers when a few hot accounts take most of the traffic. The design uses single-writer partitions with batched commit instead of row locks, and exactly-once transfers under client retries. Verification is planned through deterministic simulation testing (seeded crashes, torn writes, reordering) and checked histories.</p>
+      <div class="project-tags"><span class="ptag">Serializability</span><span class="ptag">Deterministic simulation</span><span class="ptag">TLA+</span></div>
     </div>
   </section>
 
